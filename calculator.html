@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор</title>
+  <style>
+    body {
+      background-color: #f0f8ff; /* светло-голубой цвет фона */
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    .calculator {
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 48%;
+      background-color: #e0ffe0;
+      position: absolute;
+    }
+
+    .kont {
+      position: relative;
+      border: 1px solid #ccc;
+	  background-color:blue;;
+      border-color: black;
+      width: 10%;
+      height: 30%;
+    }
+
+    .zmiana {
+      position: relative;
+      top: 20px;
+      border: 1px solid #ccc;
+      background-color: pink;
+      border-color: black;
+      width: 10%;
+      height: 30%;
+    }
+
+    input, button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="kont" id="kontBlock">
+    <h1>Calculator</h1>
+  </div>
+  <div class="zmiana">
+    <label for="top">Top:</label>
+    <input type="text" id="top" placeholder="Top">
+    <label for="left">Left:</label>
+    <input type="text" id="left" placeholder="Left">
+    <label for="width">Width:</label>
+    <input type="text" id="width" placeholder="Width">
+    <label for="height">Height:</label>
+    <input type="text" id="height" placeholder="Height">
+    <br>
+    <label for="textColor">Text Color:</label>
+    <input type="color" id="textColor">
+    <label for="bgColor">Background Color:</label>
+    <input type="color" id="bgColor">
+    <br>
+    <button onclick="changeStyles('zmiana')">Zmiana</button>
+  </div>
+  <div class="container">
+    <div class="calculator" id="calculatorBlock">
+      <h2>Calculator</h2>
+      <input type="text" id="num1" placeholder="Введите число 1">
+      <input type="text" id="num2" placeholder="Введите число 2">
+      <br>
+      <button onclick="add()">Сложение</button>
+      <button onclick="subtract()">Вычитание</button>
+      <button onclick="multiply()">Умножение</button>
+      <button onclick="divide()">Деление</button>
+      <button onclick="power()">Возведение в степень</button>
+      <button onclick="squareRoot()">Корень</button>
+      <button onclick="factorial()">Факториал</button>
+      <br>
+      <button onclick="result()">Вывести результат</button>
+    </div>
+    <div class="calculator">
+      <!-- Второй блок для других элементов -->
+    </div>
+  </div>
+
+  <script>
+    var resultField = document.createElement("input");
+    resultField.type = "text";
+    resultField.disabled = true;
+    resultField.style.margin = "5px";
+    document.querySelector(".container").lastElementChild.appendChild(resultField);
+
+    function add() {
+      resultField.value = parseFloat(num1.value) + parseFloat(num2.value);
+    }
+
+    function subtract() {
+      resultField.value = parseFloat(num1.value) - parseFloat(num2.value);
+    }
+
+    function multiply() {
+      resultField.value = parseFloat(num1.value) * parseFloat(num2.value);
+    }
+
+    function divide() {
+      resultField.value = parseFloat(num1.value) / parseFloat(num2.value);
+    }
+
+    function power() {
+      resultField.value = Math.pow(parseFloat(num1.value), parseFloat(num2.value));
+    }
+
+    function squareRoot() {
+      resultField.value = Math.sqrt(parseFloat(num1.value));
+    }
+
+    function factorial() {
+      let num = parseFloat(num1.value);
+      let result = 1;
+      for (let i = 2; i <= num; i++) {
+        result *= i;
+      }
+      resultField.value = result;
+    }
+
+    function result() {
+      alert("Результат: " + resultField.value);
+    }
+
+    function changeStyles(property) {
+      const kontBlock = document.getElementById('kontBlock');
+      switch (property) {
+        case 'zmiana':
+          const topValue = document.getElementById('top').value;
+          const leftValue = document.getElementById('left').value;
+          const widthValue = document.getElementById('width').value;
+          const heightValue = document.getElementById('height').value;
+          const textColor = document.getElementById('textColor').value;
+          const bgColor = document.getElementById('bgColor').value;
+
+          if (topValue) kontBlock.style.top = topValue + 'px';
+          if (leftValue) kontBlock.style.left = leftValue + 'px';
+          if (widthValue) kontBlock.style.width = widthValue + 'px';
+          if (heightValue) kontBlock.style.height = heightValue + 'px';
+          if (textColor) kontBlock.style.color = textColor;
+          if (bgColor) kontBlock.style.backgroundColor = bgColor;
+          break;
+      }
+    }
+  </script>
+</body>
+</html>
